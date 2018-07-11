@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Awe</string>
+    <string name="beyond_smart_lighting">Beyond smart lighting</string>
+    <string name="about_awe">About Awe</string>
+    <string name="about_us">About Us</string>
+    <string name="support">Support</string>
+    <string name="settings">Settings</string>
+    <string name="devices">Devices</string>
+    <string name="rooms_zones">Rooms/Zones</string>
+    <string name="rename_device">Rename Device</string>
+    <string name="delete_device">Delete Device</string>
+    <string name="set_colour">Set colour</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+    <string name="tip_edit_success">update success</string>
+    <string name="tip_edit_failed">edit failed</string>
+    <string name="tip_name_can_not_null">name cannot be null</string>
+    <string name="tip_all_device_name_reminder">The name for all device names cannot be used as a single device name</string>
+</resources>
