@@ -72,6 +72,14 @@ public class MainActivity extends BaseActivity implements IMainView {
         mMenu.openDrawer(Gravity.START, true);
     }
 
+    @OnClick(R.id.img_add)
+    public void OnAdd(){
+        if (viewPager.getCurrentItem() == 1){
+            //添加默认房间
+            presenter.addDefaultRoom();
+        }
+    }
+
     @Override
     public void onFindDevice() {
         toast("正在连接设备");
@@ -117,5 +125,14 @@ public class MainActivity extends BaseActivity implements IMainView {
     protected void onDestroy() {
         super.onDestroy();
         presenter.onDestroy();
+    }
+
+    @Override
+    public void addRoom(boolean success) {
+        if (success){
+            roomsFragment.refreshRoomList();
+        }else {
+            toast(R.string.add_failed);
+        }
     }
 }

@@ -1,11 +1,13 @@
 package com.ws.mesh.awe.ui.presenter;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.util.SparseArray;
 
 import com.telink.bluetooth.LeBluetooth;
 import com.telink.bluetooth.event.DeviceEvent;
@@ -26,8 +28,10 @@ import com.telink.util.EventListener;
 import com.ws.mesh.awe.MeshApplication;
 import com.ws.mesh.awe.bean.Device;
 import com.ws.mesh.awe.bean.Mesh;
+import com.ws.mesh.awe.bean.Room;
 import com.ws.mesh.awe.constant.AppConstant;
 import com.ws.mesh.awe.db.DeviceDAO;
+import com.ws.mesh.awe.db.RoomDAO;
 import com.ws.mesh.awe.service.TelinkLightService;
 import com.ws.mesh.awe.ui.impl.IMainView;
 import com.ws.mesh.awe.utils.CoreData;
@@ -305,5 +309,20 @@ public class MainPresenter implements EventListener<String>{
     private synchronized void onDeviceType(NotificationEvent event) {
 
 
+    }
+
+    //添加默认房间
+    @SuppressLint("UseSparseArrays")
+    public void addDefaultRoom(){
+        Room room = new Room();
+        room.mRoomId = CoreData.core().mRoomSparseArray.size();
+        room.mRoomName = "Room" + room.mRoomId;
+        room.mDeviceIds = new SparseArray<>();
+        CoreData.core().mRoomSparseArray.append(room.mRoomId, room);
+        if (RoomDAO.getInstance().insertRoom(room)){
+            mIPrimaryView.addRoom(true);
+        }else {
+            mIPrimaryView.addRoom(false);
+        }
     }
 }

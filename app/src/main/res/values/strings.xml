@@ -16,4 +16,49 @@
     <string name="tip_edit_failed">edit failed</string>
     <string name="tip_name_can_not_null">name cannot be null</string>
     <string name="tip_all_device_name_reminder">The name for all device names cannot be used as a single device name</string>
+    <string name="scenes">Scenes</string>
+    <string name="modes">Modes</string>
+    <string name="colour">Colour</string>
+    <string name="schedular">Schedular</string>
+    <!--Scene-->
+    <string name="scene_sleep">Sleep</string>
+    <string name="scene_celebration">Celebration</string>
+    <string name="scene_party">Party</string>
+    <string name="scene_movie_time">Movie Time</string>
+    <string name="scene_candle_light">Candle Light</string>
+    <string name="scene_date_night">Date Light</string>
+    <string name="scene_meditation">Meditation</string>
+    <string name="scene_nature">Nature</string>
+    <string name="scene_sunset">Sunset</string>
+    <string name="scene_moonlight">Moonlight</string>
+    <string name="scene_beach">Beach</string>
+    <string name="scene_visual_alarm">Visual Alarm</string>
+    <string name="intensity">Intensity</string>
+    <string name="_0">0</string>
+    <!--Modes-->
+    <string name="relax">Relax</string>
+    <string name="active">Active</string>
+    <string name="reading_mode">Reading Mode</string>
+    <string name="concentration">Concentration</string>
+    <string name="alert">Alert</string>
+    <!--Colour-->
+    <string name="red">Red</string>
+    <string name="yellow">Yellow</string>
+    <string name="green">Green</string>
+    <string name="cyan">Cyan</string>
+    <string name="blue">Blue</string>
+    <string name="purple">Purple</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="add_failed">add failed</string>
+    <string name="rename_room">Rename Room</string>
+    <string name="delete_room">Delete Room</string>
+    <string name="edit_room">Edit Room</string>
+    <string name="repeat">Repeat</string>
+    <string name="never_repeat">Never</string>
+    <string name="every_day">EveryDay</string>
+    <string name="work_day">WorkDay</string>
+    <string name="custom">Custom</string>
+    <string name="events">Events</string>
+    <string name="on">ON</string>
 </resources>

@@ -6,7 +6,6 @@
     <color name="white">#fff</color>
     <color name="black">#000</color>
     <color name="main_bg">#132D37</color>
-
     <color name="app_bg">#f1f1f3</color>
 
     <color name="text_333">#333</color>
@@ -14,4 +13,14 @@
     <color name="gray_999">#999</color>
     <color name="grey_ddd">#ddd</color>
     <color name="grey_eee">#eee</color>
+    <color name="timing_bg">#273540</color>
+
+    <color name="red">#FF0000</color>
+    <color name="orange">#FF8F00</color>
+    <color name="yellow">#D6DF20</color>
+    <color name="green">#00FF00</color>
+    <color name="cyan">#02FFFF</color>
+    <color name="blue">#0000FF</color>
+    <color name="purple">#7E00FF</color>
+    <color name="status_bar">#142633</color>
 </resources>

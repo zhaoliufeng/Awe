@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_rename"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/rename_room"
+        android:textAllCaps="false"
+        android:textColor="@color/text_333" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@color/text_333" />
+
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/delete_room"
+        android:textAllCaps="false"
+        android:textColor="@color/text_333" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@color/text_333" />
+
+    <TextView
+        android:id="@+id/tv_set_color"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/set_colour"
+        android:textAllCaps="false"
+        android:textColor="@color/text_333" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:background="@color/text_333" />
+
+    <TextView
+        android:id="@+id/tv_edit_room"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="1dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/edit_room"
+        android:textAllCaps="false"
+        android:textColor="@color/text_333" />
+
+</LinearLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="color_picker">
+        <!-- 背景圆的半径 -->
+        <attr name="circle_radius" format="dimension"/>
+        <!-- 可滑动小球的半径 -->
+        <attr name="center_radius" format="dimension"/>
+        <!-- 可滑动小球的颜色 -->
+        <attr name="center_color" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="CustomSrcBtn">
+        <!--宽度-->
+        <attr name="csSrcBtn_width" format="dimension"/>
+        <!--高度-->
+        <attr name="csSrcBtn_height" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="CustomSeekBar">
+        <attr name="csBackground" format="reference"/>
+        <attr name="csMultiplexer" format="integer"/>
+        <attr name="csThumbStartColor" format="color"/>
+    </declare-styleable>
+</resources>

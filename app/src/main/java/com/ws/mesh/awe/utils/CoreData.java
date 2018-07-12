@@ -7,9 +7,11 @@ import android.util.SparseArray;
 import com.ws.mesh.awe.base.BaseActivity;
 import com.ws.mesh.awe.bean.Device;
 import com.ws.mesh.awe.bean.Mesh;
+import com.ws.mesh.awe.bean.Room;
 import com.ws.mesh.awe.constant.AppLifeStatusConstant;
 import com.ws.mesh.awe.db.DeviceDAO;
 import com.ws.mesh.awe.db.MeshDAO;
+import com.ws.mesh.awe.db.RoomDAO;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -76,7 +78,9 @@ public class CoreData {
 
     public void initMeshData() {
         mDeviceSparseArray = DeviceDAO.getInstance().queryDevice();
+        mRoomSparseArray = RoomDAO.getInstance().queryRoom();
     }
+
     public void switchMesh(Mesh mesh) {
         if (mesh != null) {
             setCurrMesh(mesh);
@@ -109,6 +113,8 @@ public class CoreData {
 
     //当前网络的所有设备
     public SparseArray<Device> mDeviceSparseArray;
+    //当前网络的所有房间
+    public SparseArray<Room> mRoomSparseArray;
 
 
     private SparseArray<Integer> mDeletedDevice;

@@ -22,6 +22,7 @@ import com.ws.mesh.awe.R;
 import com.ws.mesh.awe.base.BaseFragment;
 import com.ws.mesh.awe.bean.Device;
 import com.ws.mesh.awe.db.DeviceDAO;
+import com.ws.mesh.awe.ui.activity.DeviceContentActivity;
 import com.ws.mesh.awe.ui.adapter.DeviceAdapter;
 import com.ws.mesh.awe.ui.impl.IDeviceFragmentView;
 import com.ws.mesh.awe.ui.presenter.DevicePresenter;
@@ -40,6 +41,8 @@ public class DeviceFragment extends BaseFragment implements IDeviceFragmentView{
     private DeviceAdapter deviceAdapter;
 
     private DevicePresenter presenter;
+
+    private AlertDialog renameDialog;
 
     @Override
     protected int getLayoutId() {
@@ -75,7 +78,7 @@ public class DeviceFragment extends BaseFragment implements IDeviceFragmentView{
 
                 @Override
                 public void onEdit(int position) {
-
+                    pushActivity(DeviceContentActivity.class);
                 }
             };
 
@@ -113,7 +116,7 @@ public class DeviceFragment extends BaseFragment implements IDeviceFragmentView{
         tvSetColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                pushActivity(DeviceContentActivity.class);
             }
         });
     }
@@ -129,13 +132,13 @@ public class DeviceFragment extends BaseFragment implements IDeviceFragmentView{
     }
 
     private void popRenameDialog(final Device device) {
-        final AlertDialog mAlertDialog = new AlertDialog.Builder(getActivity(), R.style.CustomDialog).create();
-        mAlertDialog.show();
-        Window window = mAlertDialog.getWindow();
+        renameDialog = new AlertDialog.Builder(getActivity(), R.style.CustomDialog).create();
+        renameDialog.show();
+        Window window = renameDialog.getWindow();
         if (window != null) {
             window.setContentView(R.layout.dialog_rename);
-            mAlertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-            mAlertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+            renameDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+            renameDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
             //获取控件绑定 并初始化值
             final EditText edtNewDeviceName = window.findViewById(R.id.edt_edit_input);
@@ -143,7 +146,7 @@ public class DeviceFragment extends BaseFragment implements IDeviceFragmentView{
                 edtNewDeviceName.setHint(device.mDevName);
             edtNewDeviceName.setFocusable(true);
             edtNewDeviceName.setFocusableInTouchMode(true);
-            
+
             CoreData.mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
@@ -166,7 +169,7 @@ public class DeviceFragment extends BaseFragment implements IDeviceFragmentView{
             cancel.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mAlertDialog.dismiss();
+                    renameDialog.dismiss();
                 }
             });
         }
@@ -176,6 +179,7 @@ public class DeviceFragment extends BaseFragment implements IDeviceFragmentView{
     public void onSaveDeviceNameSuccess(Device device) {
         toast(R.string.tip_edit_success);
         deviceAdapter.notifyItemChanged(CoreData.core().mDeviceSparseArray.indexOfKey(device.mDevMeshId));
+        renameDialog.dismiss();
     }
 
     @Override

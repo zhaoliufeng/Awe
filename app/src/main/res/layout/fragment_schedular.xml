@@ -5,9 +5,17 @@
     android:background="@color/main_bg">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rl_rooms_list"
+        android:id="@+id/recl_timing"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     </android.support.v7.widget.RecyclerView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="50dp"
+        android:src="@drawable/icon_add" />
 </RelativeLayout>

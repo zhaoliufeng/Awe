@@ -4,6 +4,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.ws.mesh.awe.bean.Room;
+import com.ws.mesh.awe.bean.Timing;
+
 /**
  * Created by Zhao Liufeng on 2018/4/20.
  */
@@ -20,6 +23,8 @@ public class DBOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         MeshDAO.getInstance().createTable(db);
         DeviceDAO.getInstance().createTable(db);
+        RoomDAO.getInstance().createTable(db);
+        TimingDAO.getInstance().createTable(db);
     }
 
     @Override

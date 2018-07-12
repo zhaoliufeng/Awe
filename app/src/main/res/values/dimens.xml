@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="content_input">50dp</dimen>
+    <dimen name="all_text_size">13sp</dimen>
+    <dimen name="main_page_item_height">25dp</dimen>
+</resources>

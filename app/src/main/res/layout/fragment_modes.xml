@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:colorpicker="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg">
+
+    <com.ws.mesh.awe.views.ColorPickView
+        android:id="@+id/cp_warm_cold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        colorpicker:center_color="@color/white"
+        colorpicker:center_radius="8dp"
+        colorpicker:circle_radius="100dp" />
+
+    <com.ws.mesh.awe.views.CustomSeekBar
+        android:id="@+id/sb_brightness"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/cp_warm_cold"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="15dp"
+        colorpicker:csThumbStartColor="@color/white"
+        custom:csBackground="@drawable/bg_seek_bar"
+        custom:csMultiplexer="5">
+
+    </com.ws.mesh.awe.views.CustomSeekBar>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@id/sb_brightness"
+        android:layout_below="@id/sb_brightness"
+        android:text="@string/intensity" />
+
+    <TextView
+        android:id="@+id/tv_brightness"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/sb_brightness"
+        android:layout_below="@id/sb_brightness"
+        android:text="@string/_0" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recl_modes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tv_brightness">
+
+    </android.support.v7.widget.RecyclerView>
+</RelativeLayout>

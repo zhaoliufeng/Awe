@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_frame"
+    android:layout_width="match_parent"
+    android:layout_height="125dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/img_scene_icon"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:paddingBottom="3dp"
+        android:paddingTop="8dp"
+        android:src="@drawable/icon_scene_sleep" />
+
+    <TextView
+        android:id="@+id/tv_scene_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/scene_sleep"
+        android:textColor="@color/white" />
+</LinearLayout>

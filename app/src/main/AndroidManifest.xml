@@ -20,6 +20,8 @@
         <activity android:name=".ui.activity.MainActivity">
 
         </activity>
+        <activity android:name=".ui.activity.DeviceContentActivity" />
+
         <service android:name=".service.TelinkLightService"
             android:enabled="true"/>
     </application>

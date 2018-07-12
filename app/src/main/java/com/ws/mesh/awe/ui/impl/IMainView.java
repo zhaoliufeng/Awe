@@ -25,4 +25,7 @@ public interface IMainView {
 
     //更新设备
     void updateDevice(SparseArray<Device> deviceSparseArray);
+
+    //添加房间
+    void addRoom(boolean success);
 }

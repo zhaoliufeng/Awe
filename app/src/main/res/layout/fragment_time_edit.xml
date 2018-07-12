@@ -1,0 +1,207 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/time_date_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/timing_bg"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <TimePicker
+            android:id="@+id/tp_time"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:calendarViewShown="false"
+            android:timePickerMode="spinner" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/timing_bg"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/content_input"
+            android:gravity="center_vertical"
+            android:paddingEnd="0dp"
+            android:paddingStart="10dp"
+            android:text="@string/repeat"
+            android:textColor="#FFF"
+            android:textSize="16sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/timing_bg" />
+
+        <RelativeLayout
+            android:id="@+id/rl_never_repeat"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/content_input"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/never_repeat"
+                android:textColor="#99ffffff"
+                android:textSize="@dimen/all_text_size" />
+
+            <ImageView
+                android:id="@+id/iv_never_repeat"
+                android:layout_width="@dimen/main_page_item_height"
+                android:layout_height="@dimen/main_page_item_height"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/icon_single_selector" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/status_bar" />
+
+        <RelativeLayout
+            android:id="@+id/rl_every_day"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/content_input"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/every_day"
+                android:textColor="#99ffffff"
+                android:textSize="@dimen/all_text_size" />
+
+            <ImageView
+                android:id="@+id/iv_every_day"
+                android:layout_width="@dimen/main_page_item_height"
+                android:layout_height="@dimen/main_page_item_height"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/icon_single_selector" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/status_bar" />
+
+
+        <RelativeLayout
+            android:id="@+id/rl_work_day"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/content_input"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/work_day"
+                android:textColor="#99ffffff"
+                android:textSize="@dimen/all_text_size" />
+
+            <ImageView
+                android:id="@+id/iv_work_day"
+                android:layout_width="@dimen/main_page_item_height"
+                android:layout_height="@dimen/main_page_item_height"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/icon_single_selector" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/status_bar" />
+
+        <RelativeLayout
+            android:id="@+id/rl_custom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/content_input"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/custom_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="@string/custom"
+                android:textColor="#99ffffff"
+                android:textSize="@dimen/all_text_size" />
+
+            <TextView
+                android:id="@+id/tv_custom_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/custom_name"
+                android:textColor="#99ffffff"
+                android:textSize="11sp" />
+
+            <ImageView
+                android:id="@+id/iv_custom"
+                android:layout_width="@dimen/main_page_item_height"
+                android:layout_height="@dimen/main_page_item_height"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/icon_single_selector" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_choose_events"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/content_input"
+        android:layout_marginTop="5dp"
+        android:background="@color/timing_bg"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="@string/events"
+            android:textColor="#FFF"
+            android:textSize="16sp" />
+
+
+        <ImageView
+            android:id="@+id/right_arrow"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="5dp"
+            android:src="@drawable/list_icon_arrow" />
+
+        <TextView
+            android:id="@+id/tv_events"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:layout_toStartOf="@id/right_arrow"
+            android:text="@string/on" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>
+

@@ -69,6 +69,10 @@ public abstract class BaseActivity extends FragmentActivity {
         });
     }
 
+    protected void toast(int id){
+        toast(getString(id));
+    }
+
     /**
      * 设置状态栏 高度
      */
