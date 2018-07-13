@@ -61,4 +61,23 @@
     <string name="custom">Custom</string>
     <string name="events">Events</string>
     <string name="on">ON</string>
+    <string name="off">OFF</string>
+    <string name="breath_rainbow">Rainbow</string>
+    <string name="breath_heartbeat">Heartbeat</string>
+    <string name="breath_green">GreenBreath</string>
+    <string name="breath_blue">BlueBreath</string>
+    <string name="breath_alarm">Alarm</string>
+    <string name="breath_twinkle">Flash</string>
+
+    <string name="sun">Sun</string>
+    <string name="mon">Mon</string>
+    <string name="tus">Tus</string>
+    <string name="wed">Wed</string>
+    <string name="thur">Thur</string>
+    <string name="fri">Fri</string>
+    <string name="sat">Sat</string>
+    <string name="title">Title</string>
+
+    <string name="custom_week">Custom</string>
+    <string name="choose_event">Select Tasks</string>
 </resources>

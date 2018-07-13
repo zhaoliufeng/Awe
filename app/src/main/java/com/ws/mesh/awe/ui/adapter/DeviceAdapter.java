@@ -21,10 +21,16 @@ import butterknife.ButterKnife;
 
 public class DeviceAdapter extends RecyclerView.Adapter {
 
-    SparseArray<Device> mDatas;
+    private SparseArray<Device> mDatas;
 
     public DeviceAdapter(SparseArray<Device> deviceSparseArray) {
-        mDatas = deviceSparseArray;
+        mDatas = new SparseArray<>();
+        for (int i = 0; i < deviceSparseArray.size(); i++) {
+            if (deviceSparseArray.valueAt(i).mConnectionStatus != null &&
+                    deviceSparseArray.valueAt(i).mConnectionStatus != ConnectionStatus.OFFLINE) {
+                mDatas.append(deviceSparseArray.valueAt(i).mDevMeshId, deviceSparseArray.valueAt(i));
+            }
+        }
     }
 
     @NonNull
@@ -77,9 +83,18 @@ public class DeviceAdapter extends RecyclerView.Adapter {
     }
 
     public void refreshDevice(Device device) {
-        mDatas.append(device.mDevMeshId, device);
-        int index = mDatas.indexOfKey(device.mDevMeshId);
-        notifyItemChanged(index);
+        if (device.mConnectionStatus != null && device.mConnectionStatus != ConnectionStatus.OFFLINE) {
+            mDatas.append(device.mDevMeshId, device);
+            int index = mDatas.indexOfKey(device.mDevMeshId);
+            notifyItemChanged(index);
+        } else {
+            if (mDatas.get(device.mDevMeshId) != null) {
+                int index = mDatas.indexOfKey(device.mDevMeshId);
+                mDatas.remove(device.mDevMeshId);
+                notifyItemRemoved(index);
+            }
+        }
+
     }
 
     private OnDeviceSelectListener onDeviceSelectListener;

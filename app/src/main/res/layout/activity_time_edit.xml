@@ -3,6 +3,57 @@
     android:layout_height="match_parent"
     android:background="@color/main_bg"
     android:orientation="vertical">
+    <View
+        android:id="@+id/view_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorPrimary" />
+
+    <RelativeLayout
+        android:id="@+id/rl_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/header_title_height"
+        android:background="@color/colorPrimary">
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="4dp"
+            android:padding="7dp"
+            android:src="@drawable/nav_bar_icon_back_white" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="@dimen/title_text_size" />
+
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:layout_marginEnd="7dp"
+            android:gravity="center"
+            android:text="@string/confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"/>
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/img_add"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="4dp"
+            android:padding="7dp"
+            android:src="@drawable/nav_bar_icon_add_white" />
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/time_date_picker"
@@ -64,7 +115,7 @@
                 android:layout_width="@dimen/main_page_item_height"
                 android:layout_height="@dimen/main_page_item_height"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/icon_single_selector" />
+                android:src="@drawable/icon_single_unselected" />
         </RelativeLayout>
 
         <View
@@ -91,7 +142,7 @@
                 android:layout_width="@dimen/main_page_item_height"
                 android:layout_height="@dimen/main_page_item_height"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/icon_single_selector" />
+                android:src="@drawable/icon_single_unselected" />
         </RelativeLayout>
 
         <View
@@ -119,7 +170,7 @@
                 android:layout_width="@dimen/main_page_item_height"
                 android:layout_height="@dimen/main_page_item_height"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/icon_single_selector" />
+                android:src="@drawable/icon_single_unselected" />
         </RelativeLayout>
 
         <View
@@ -157,7 +208,7 @@
                 android:layout_width="@dimen/main_page_item_height"
                 android:layout_height="@dimen/main_page_item_height"
                 android:layout_alignParentEnd="true"
-                android:src="@drawable/icon_single_selector" />
+                android:src="@drawable/icon_single_unselected" />
         </RelativeLayout>
 
 
@@ -198,7 +249,7 @@
             android:layout_centerVertical="true"
             android:layout_marginEnd="10dp"
             android:layout_toStartOf="@id/right_arrow"
-            android:text="@string/on" />
+            android:text="@string/off" />
 
     </RelativeLayout>
 

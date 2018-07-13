@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="custom_week_data">
+        <item>@string/sun</item>
+        <item>@string/mon</item>
+        <item>@string/tus</item>
+        <item>@string/wed</item>
+        <item>@string/thur</item>
+        <item>@string/fri</item>
+        <item>@string/sat</item>
+    </string-array>
+
+    <string-array name="timing_events">
+        <item>@string/off</item>
+        <item>@string/on</item>
+        <item>@string/breath_rainbow</item>
+        <item>@string/breath_heartbeat</item>
+        <item>@string/breath_green</item>
+        <item>@string/breath_blue</item>
+        <item>@string/breath_alarm</item>
+        <item>@string/breath_twinkle</item>
+    </string-array>
+
+    <string-array name="alarm_warm_event_data">
+        <item>@string/off</item>
+        <item>@string/on</item>
+    </string-array>
+</resources>

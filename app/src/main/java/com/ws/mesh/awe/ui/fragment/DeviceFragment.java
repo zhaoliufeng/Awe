@@ -78,7 +78,8 @@ public class DeviceFragment extends BaseFragment implements IDeviceFragmentView{
 
                 @Override
                 public void onEdit(int position) {
-                    pushActivity(DeviceContentActivity.class);
+                    Device device = CoreData.core().mDeviceSparseArray.valueAt(position);
+                    pushActivityWithMeshAddress(DeviceContentActivity.class, device.mDevMeshId);
                 }
             };
 

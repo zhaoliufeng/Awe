@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.ws.mesh.awe.MeshApplication;
+import com.ws.mesh.awe.constant.AppConstant;
+import com.ws.mesh.awe.constant.IntentConstant;
 
 import java.util.Objects;
 
@@ -41,6 +43,10 @@ public abstract class BaseFragment extends Fragment {
         startActivity(new Intent(getActivity(), clazz));
     }
 
+    public void pushActivityWithMeshAddress(Class<?> clazz, int meshAddress){
+        startActivity(new Intent(getActivity(), clazz)
+                .putExtra(IntentConstant.MESH_ADDRESS, meshAddress));
+    }
     @Override
     public void onDestroyView() {
         super.onDestroyView();

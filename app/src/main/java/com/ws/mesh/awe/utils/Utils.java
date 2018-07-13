@@ -45,4 +45,41 @@ public class Utils {
     public static int blue(int color) {
         return color & 0xFF;
     }
+
+    public static byte[] weekNumToBinaryByteArray(int intVal) {
+        byte[] values = new byte[]{ 0, 0, 0, 0, 0, 0, 0 };
+        if (intVal != -1) {
+            int step = 1;
+            while ( intVal != 0 ) {
+                values[ values.length - step ] = (byte) (intVal % 2);
+                intVal /= 2;
+                step++;
+            }
+        }
+        return values;
+    }
+
+    public static int byteArrayToWeekNum(byte[] weekByte) {
+        int value;
+        value = (weekByte[ 0 ] << 6)
+                + (weekByte[ 1 ] << 5)
+                + (weekByte[ 2 ] << 4)
+                + (weekByte[ 3 ] << 3)
+                + (weekByte[ 4 ] << 2)
+                + (weekByte[ 5 ] << 1)
+                + (weekByte[ 6 ]);
+        return value;
+    }
+
+
+    //翻转byte[]
+    public static byte[] reverseBytes(byte[] src){
+        byte tempVal = src[0];
+        for (int i = 0; i < src.length/2; i++){
+            src[i] = src[src.length - i - 1];
+            src[src.length - i - 1] = tempVal;
+            tempVal = src[i + 1];
+        }
+        return src;
+    }
 }

@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import com.ws.mesh.awe.R;
 import com.ws.mesh.awe.base.BaseActivity;
 import com.ws.mesh.awe.base.BaseFragment;
+import com.ws.mesh.awe.constant.IntentConstant;
 import com.ws.mesh.awe.ui.adapter.ViewPagerAdapter;
 import com.ws.mesh.awe.ui.fragment.ColourFragment;
 import com.ws.mesh.awe.ui.fragment.DeviceFragment;
@@ -31,6 +32,8 @@ public class DeviceContentActivity extends BaseActivity {
     private ModesFragment modesFragment;
     private ColourFragment colourFragment;
     private SchedularFragment schedularFragment;
+
+    private int meshAddress;
     @Override
     protected int getLayoutId() {
         return R.layout.activity_device_content;
@@ -38,6 +41,7 @@ public class DeviceContentActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        meshAddress = getIntent().getIntExtra(IntentConstant.MESH_ADDRESS, 0x00);
         List<BaseFragment> mFragmentList = new ArrayList<>();
         List<String> mTitleList = new ArrayList<>();
 

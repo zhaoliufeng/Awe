@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.util.Log;
 import android.util.SparseArray;
 
 import com.telink.bluetooth.LeBluetooth;
@@ -35,6 +36,7 @@ import com.ws.mesh.awe.db.RoomDAO;
 import com.ws.mesh.awe.service.TelinkLightService;
 import com.ws.mesh.awe.ui.impl.IMainView;
 import com.ws.mesh.awe.utils.CoreData;
+import com.ws.mesh.awe.utils.SendMsg;
 import com.ws.mesh.awe.utils.TaskPool;
 
 import java.util.List;
@@ -257,7 +259,7 @@ public class MainPresenter implements EventListener<String>{
                 } else {
                     if (status != 0) {
                         device = new Device();
-                        device.mDevName = AppConstant.DEVICE_DEFAULT_NAME;
+                        device.mDevName = AppConstant.DEVICE_DEFAULT_NAME + "-" + meshAddress;
                         device.mConnectionStatus = connectionStatus;
                         device.mDevMeshId = meshAddress;
                         CoreData.core().mDeviceSparseArray.put(device.mDevMeshId, device);
@@ -307,8 +309,40 @@ public class MainPresenter implements EventListener<String>{
      * 设备类型解析
      */
     private synchronized void onDeviceType(NotificationEvent event) {
+        synchronized (MainPresenter.this) {
+            NotificationInfo info = event.getArgs();
+            int srcAddress = info.src & 0xFF;
+            byte[] params = info.params;
+            Device device = CoreData.core().mDeviceSparseArray.get(srcAddress);
+            int type;
+            if (device != null && params[0] == 0x01) {
+                int one = ((int) params[1] & 0xFF) << 8;
+                int two = params[2] & 0xFF;
+                type = one + two;
+                if (device.mDevType != type) {
+                    device.mDevType = type;
+                    CoreData.core().mDeviceSparseArray.put(device.mDevMeshId, device);
+                    if (DeviceDAO.getInstance().updateDevice(device)) {
+                        mIPrimaryView.statusUpdate(device);
+                    }
+                }
+            }
+            //判断是否全部获取到了设备类型
+            int notTypeDeviceAddress = hasAllType();
+            if (notTypeDeviceAddress != -1) {
+                SendMsg.getDeviceType(notTypeDeviceAddress);
+            }
+        }
 
+    }
 
+    private int hasAllType() {
+        for (int i = 0; i < CoreData.core().mDeviceSparseArray.size(); i++) {
+            if (CoreData.core().mDeviceSparseArray.valueAt(i).mDevType == AppConstant.DEFAULT_TYPE) {
+                return CoreData.core().mDeviceSparseArray.valueAt(i).mDevMeshId;
+            }
+        }
+        return -1;
     }
 
     //添加默认房间

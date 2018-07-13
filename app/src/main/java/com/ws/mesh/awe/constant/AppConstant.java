@@ -11,4 +11,20 @@ public class AppConstant {
     public static final int ALARM_TYPE_DEVICE = 1;
     public static final int ALARM_TYPE_GROUP = 2;
     public static final String ID = "_id";
+    public static final int DEFAULT_TYPE = 0xA0FF;
+
+    public static final long DAY_TIME = 1000L * 24 * 60 * 60;
+
+    public static final byte SCENE_ALARM = (byte) 0x92;
+    //关闭闹钟
+    public static final byte OFF_ALARM = (byte) 0x90;
+    //开启闹钟
+    public static final byte ON_ALARM = (byte) 0x91;
+    //日模式的場景鬧鐘
+    public static final byte DAY_SCENE_ALARM = (byte) 0x82;
+    //日模式的关闭鬧鐘
+    public static final byte DAY_OFF_ALARM = (byte) 0x80;
+    //日模式的打开鬧鐘
+    public static final byte DAY_ON_ALARM = (byte) 0x81;
+
 }

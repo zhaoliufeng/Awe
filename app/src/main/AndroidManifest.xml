@@ -21,6 +21,7 @@
 
         </activity>
         <activity android:name=".ui.activity.DeviceContentActivity" />
+        <activity android:name=".ui.activity.TimingEditActivity" />
 
         <service android:name=".service.TelinkLightService"
             android:enabled="true"/>

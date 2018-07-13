@@ -25,6 +25,10 @@ public class Device {
     @DBFiled
     public int mDevMeshId;
 
+    //设备类型
+    @DBFiled
+    public int mDevType;
+
     //设备通道1
     @DBFiled
     public String mChannelOne;

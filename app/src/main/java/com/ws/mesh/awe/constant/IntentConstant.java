@@ -9,4 +9,10 @@ public class IntentConstant {
 
     //传递下一步需要的ID（场景、定时、设备、群组）
     public static final String NEED_ID = "need_id";
+
+    //闹钟id
+    public static final String ALARM_ID = "alarm_id";
+
+    //meshAddress
+    public static final String MESH_ADDRESS = "mesh_address";
 }
