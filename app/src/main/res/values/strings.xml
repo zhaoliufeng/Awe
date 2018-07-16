@@ -80,4 +80,35 @@
 
     <string name="custom_week">Custom</string>
     <string name="choose_event">Select Tasks</string>
+    <string name="cannot_add_alarm_anymore">Cannot add alarm anymore</string>
+    <string name="add_timing_success">Add Timing Success</string>
+    <string name="add_timing_failed">Add Timing Failed</string>
+    <string name="delete_success">Delete Success</string>
+    <string name="delete_failed">Delete Failed</string>
+    <string name="current_device">Current Device</string>
+    <string name="not_added_device">Not Added</string>
+    <string name="add">add</string>
+    <string name="del">del</string>
+    <string name="country_area">Country/Region</string>
+    <string name="phone_email">phone / email</string>
+    <string name="password">Password</string>
+    <string name="start_login">Login</string>
+    <string name="cant_create_network">Cannot create network</string>
+    <string name="name_can_not_null">name cannot be empty</string>
+    <string name="pls_input_account_pwd">please input account and password</string>
+    <string name="login_failed">Login Failed</string>
+
+    <string name="success_add_device">"Successfully add  device: "</string>
+    <string name="done">Done</string>
+    <string name="please_restart_ble">Please Restart the Bluetooth</string>
+    <string name="find_device">Found Device</string>
+    <string name="search">Searching Device</string>
+    <string name="add_dev_fail">Failed to add device</string>
+    <string name="cannot_add_any_device">sorry,you had 256 device,can not add anymore</string>
+    <string name="ble_close">Bluetooth Closed</string>
+    <string name="continue_add">Continue Add?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="remove_failed">Remove Failed</string>
+    <string name="remove_success">Remove Success</string>
 </resources>

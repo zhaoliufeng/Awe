@@ -94,7 +94,14 @@ public class DeviceAdapter extends RecyclerView.Adapter {
                 notifyItemRemoved(index);
             }
         }
+    }
 
+    public void removeDevice(Device device){
+        if (mDatas.get(device.mDevMeshId) != null) {
+            int index = mDatas.indexOfKey(device.mDevMeshId);
+            mDatas.remove(device.mDevMeshId);
+            notifyItemRemoved(index);
+        }
     }
 
     private OnDeviceSelectListener onDeviceSelectListener;

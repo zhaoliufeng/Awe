@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@drawable/edit_device_item_background"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="87dp">
+
+    <LinearLayout
+        android:id="@+id/llayout_item"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.4"/>
+            <ImageView
+                android:src="@drawable/icon_light_on"
+                android:id="@+id/iv_device_edit_icon"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.1"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_device_edit_name"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="11sp"
+            android:textColor="#8A97A3"
+            tools:text="@string/devices"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/llayout_mark"
+        android:background="@drawable/edit_device_item_mark_bg"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.2">
+            <ImageView
+                android:id="@+id/iv_device_mark_img"
+                android:layout_marginTop="22dp"
+                android:src="@drawable/group_icon_delete_dev"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_device_mark_name"
+            android:layout_marginTop="6dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#FFF"
+            tools:text="移除"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</FrameLayout>

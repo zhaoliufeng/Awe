@@ -40,8 +40,6 @@ public class TimingEditActivity extends BaseActivity implements ITimingEditView 
     ImageView ivWorkDay;
     @BindView(R.id.iv_custom)
     ImageView ivCustom;
-    @BindView(R.id.rl_choose_events)
-    RelativeLayout rlChooseEvents;
     @BindView(R.id.tv_custom_detail)
     TextView customDetail;
     @BindView(R.id.tv_events)
@@ -68,6 +66,7 @@ public class TimingEditActivity extends BaseActivity implements ITimingEditView 
 
         alarmId = getIntent().getIntExtra(IntentConstant.ALARM_ID, -1);
         meshAddress = getIntent().getIntExtra(IntentConstant.MESH_ADDRESS, -1);
+        presenter.init(meshAddress);
 
         tpTime.setOnTimeChangedListener(onTimeChangedListener);
         if (weekNum == 0) {
@@ -84,6 +83,12 @@ public class TimingEditActivity extends BaseActivity implements ITimingEditView 
     @OnClick(R.id.tv_confirm)
     void OnConfirm(){
         //确定添加定时
+        presenter.addAlarm(hour, minutes, eventId, weekNum, meshAddress, alarmId);
+    }
+
+    @OnClick(R.id.img_back)
+    void OnBack(){
+        finish();
     }
 
     @OnClick({R.id.rl_never_repeat, R.id.rl_every_day, R.id.rl_work_day, R.id.rl_custom})
@@ -113,6 +118,7 @@ public class TimingEditActivity extends BaseActivity implements ITimingEditView 
     void OnChooseEvents(){
         showEventsDialog();
     }
+
     //清空所有重复选项的选中状态
     private void clearSelectedState() {
         ivNeverRepeat.setImageResource(R.drawable.icon_single_unselected);
@@ -165,6 +171,21 @@ public class TimingEditActivity extends BaseActivity implements ITimingEditView 
                 }
             });
         }
+    }
+
+    @Override
+    public void addAlarm(boolean success) {
+        if (success){
+            toast(R.string.add_timing_success);
+            finish();
+        }else {
+            toast(R.string.add_timing_failed);
+        }
+    }
+
+    @Override
+    public void maximumNumber() {
+        toast(R.string.cannot_add_alarm_anymore);
     }
 
     class AlarmCustomWeekAdapter extends RecyclerView.Adapter {

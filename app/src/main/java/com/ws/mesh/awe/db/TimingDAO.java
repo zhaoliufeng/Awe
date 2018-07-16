@@ -54,7 +54,7 @@ public class TimingDAO extends BaseDAO<Timing> {
     }
 
     private SparseArray<Timing> queryTiming(String[] whereKey, String... whereValue) {
-        List<Timing> alarms = query(whereKey, whereValue);
+        List<Timing> alarms = query(whereValue, whereKey);
         SparseArray<Timing> alarmSparseArray = new SparseArray<>();
         for (Timing alarm : alarms) {
             alarmSparseArray.put(alarm.mAId, alarm);
@@ -62,7 +62,7 @@ public class TimingDAO extends BaseDAO<Timing> {
         return alarmSparseArray;
     }
 
-    private boolean updateTiming(Timing timing) {
+    public boolean updateTiming(Timing timing) {
         return update(timing, "mParentId", "mAlarmMeshName", "mAlarmType" ,"mAId");
     }
 }

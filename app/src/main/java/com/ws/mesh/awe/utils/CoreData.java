@@ -65,6 +65,10 @@ public class CoreData {
         mCurrMesh = mesh;
     }
 
+    public boolean isEmptyMesh() {
+        return mCurrMesh == null;
+    }
+
 
     /*
      * 全局数据

@@ -43,26 +43,22 @@ public class LauncherPresenter {
         Mesh mesh;
         if (CoreData.core().mMeshMap == null
                 || CoreData.core().mMeshMap.size() == 0) {
-            mesh = new Mesh();
-
-            mesh.mMeshName = AppConstant.MESH_DEFAULT_NAME;
-            mesh.mMeshPassword = AppConstant.MESH_DEFAULT_PASSWORD;
-            mesh.mMeshFactoryName = AppConstant.MESH_DEFAULT_NAME;
-            mesh.mMeshFactoryPassword = AppConstant.MESH_DEFAULT_PASSWORD;
-
-            MeshDAO.getInstance().insertMesh(mesh);
-            SPUtils.setLatelyMesh(mesh.mMeshName);
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    view.enterLogin();
+                }
+            }, 500);
         }else {
             String meshName = SPUtils.getLatelyMesh();
             mesh = CoreData.core().mMeshMap.get(meshName);
+            CoreData.core().switchMesh(mesh);
+            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    view.enterMain();
+                }
+            }, 1500);
         }
-        CoreData.core().switchMesh(mesh);
-
-        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                view.enterMain();
-            }
-        }, 1500);
     }
 }

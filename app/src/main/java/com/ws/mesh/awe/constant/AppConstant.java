@@ -27,4 +27,14 @@ public class AppConstant {
     //日模式的打开鬧鐘
     public static final byte DAY_ON_ALARM = (byte) 0x81;
 
+    //起始房间id
+    public static final int ROOM_START_ID = 0x8011;
+    //末尾房间id
+    public static final int ROOM_LAST_ID = 0x80D9;
+
+    //网关设备
+    public static final int OTHER_DEVICE_GATEWAY = 0xC100;
+
+    public static final long MIN_SEND_GAP = 120;
+    public static final int MIN_BRIGHTNESS = 5;
 }

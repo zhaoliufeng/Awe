@@ -349,8 +349,8 @@ public class MainPresenter implements EventListener<String>{
     @SuppressLint("UseSparseArrays")
     public void addDefaultRoom(){
         Room room = new Room();
-        room.mRoomId = CoreData.core().mRoomSparseArray.size();
-        room.mRoomName = "Room" + room.mRoomId;
+        room.mRoomId = getRoomId();
+        room.mRoomName = "Room-" + (room.mRoomId - AppConstant.ROOM_START_ID);
         room.mDeviceIds = new SparseArray<>();
         CoreData.core().mRoomSparseArray.append(room.mRoomId, room);
         if (RoomDAO.getInstance().insertRoom(room)){
@@ -358,5 +358,15 @@ public class MainPresenter implements EventListener<String>{
         }else {
             mIPrimaryView.addRoom(false);
         }
+    }
+
+    //获取可用的RoomId
+    private int getRoomId() {
+        for (int id = AppConstant.ROOM_START_ID; id < AppConstant.ROOM_LAST_ID; id++) {
+            if (CoreData.core().mRoomSparseArray.get(id) == null) {
+                return id;
+            }
+        }
+        return -1;
     }
 }

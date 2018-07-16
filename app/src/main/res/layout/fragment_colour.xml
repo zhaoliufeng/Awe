@@ -7,7 +7,7 @@
     android:background="@color/main_bg">
 
     <com.ws.mesh.awe.views.ColorPickView
-        android:id="@+id/cp_warm_cold"
+        android:id="@+id/cp_colour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -20,7 +20,7 @@
         android:id="@+id/sb_brightness"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_below="@id/cp_warm_cold"
+        android:layout_below="@id/cp_colour"
         android:layout_marginEnd="30dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="15dp"

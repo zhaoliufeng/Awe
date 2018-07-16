@@ -22,6 +22,9 @@
         </activity>
         <activity android:name=".ui.activity.DeviceContentActivity" />
         <activity android:name=".ui.activity.TimingEditActivity" />
+        <activity android:name=".ui.activity.GroupEditDevActivity" />
+        <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.activity.ScanDeviceActivity" />
 
         <service android:name=".service.TelinkLightService"
             android:enabled="true"/>

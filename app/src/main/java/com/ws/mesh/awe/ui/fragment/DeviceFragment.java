@@ -43,6 +43,7 @@ public class DeviceFragment extends BaseFragment implements IDeviceFragmentView{
     private DevicePresenter presenter;
 
     private AlertDialog renameDialog;
+    private PopupWindow pop;
 
     @Override
     protected int getLayoutId() {
@@ -87,7 +88,7 @@ public class DeviceFragment extends BaseFragment implements IDeviceFragmentView{
     private void popWindow(View v, final int position) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.pop_device_layout, null);
         //设置屏幕的高度和宽度
-        final PopupWindow pop = new PopupWindow(view, getScreenWidth(getActivity()),
+        pop = new PopupWindow(view, getScreenWidth(getActivity()),
                 (getScreenHeight(getActivity()) / 4));
         pop.setBackgroundDrawable(getResources().getDrawable(R.drawable.pop_background));
         pop.setOutsideTouchable(true);
@@ -110,14 +111,14 @@ public class DeviceFragment extends BaseFragment implements IDeviceFragmentView{
         tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                presenter.kickOutDevice(device);
             }
         });
 
         tvSetColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pushActivity(DeviceContentActivity.class);
+                pushActivityWithMeshAddress(DeviceContentActivity.class, device.mDevMeshId);
             }
         });
     }
@@ -181,10 +182,23 @@ public class DeviceFragment extends BaseFragment implements IDeviceFragmentView{
         toast(R.string.tip_edit_success);
         deviceAdapter.notifyItemChanged(CoreData.core().mDeviceSparseArray.indexOfKey(device.mDevMeshId));
         renameDialog.dismiss();
+        pop.dismiss();
     }
 
     @Override
     public void onSaveDeviceNameError(int errMsgId) {
         toast(errMsgId);
+    }
+
+    @Override
+    public void onRemoveDevice(Device device) {
+        toast(R.string.remove_success);
+        deviceAdapter.removeDevice(device);
+        pop.dismiss();
+    }
+
+    @Override
+    public void onError(int errMsg) {
+        toast(errMsg);
     }
 }

@@ -71,7 +71,7 @@ public class RoomAdapter extends RecyclerView.Adapter {
         return mDatas.size();
     }
 
-    public void refreshDevice(Room room) {
+    public void refreshRoom(Room room) {
         mDatas.append(room.mRoomId, room);
         int index = mDatas.indexOfKey(room.mRoomId);
         notifyItemChanged(index);

@@ -10,10 +10,11 @@
 
     <color name="text_333">#333</color>
     <color name="text_666">#666</color>
-    <color name="gray_999">#999</color>
+    <color name="grey_999">#999</color>
     <color name="grey_ddd">#ddd</color>
     <color name="grey_eee">#eee</color>
     <color name="timing_bg">#273540</color>
+    <color name="main_group_switch_background_normal_color">#324656</color>
 
     <color name="red">#FF0000</color>
     <color name="orange">#FF8F00</color>

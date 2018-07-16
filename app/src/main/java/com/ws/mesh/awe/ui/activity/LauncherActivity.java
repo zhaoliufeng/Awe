@@ -8,7 +8,6 @@ import com.ws.mesh.awe.ui.presenter.LauncherPresenter;
 import com.ws.mesh.awe.utils.CoreData;
 
 public class LauncherActivity extends BaseActivity implements ILauncherView{
-    private LauncherPresenter presenter;
     @Override
     protected int getLayoutId() {
         CoreData.core().setCurrAppStatus(AppLifeStatusConstant.NORMAL_START);
@@ -17,11 +16,16 @@ public class LauncherActivity extends BaseActivity implements ILauncherView{
 
     @Override
     protected void initData() {
-        presenter = new LauncherPresenter(this);
+        new LauncherPresenter(this);
     }
 
     @Override
     public void enterMain() {
         pushActivity(MainActivity.class);
+    }
+
+    @Override
+    public void enterLogin() {
+        pushActivity(LoginActivity.class);
     }
 }

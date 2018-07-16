@@ -11,6 +11,7 @@ import com.ws.mesh.awe.R;
 import com.ws.mesh.awe.base.BaseActivity;
 import com.ws.mesh.awe.base.BaseFragment;
 import com.ws.mesh.awe.bean.Device;
+import com.ws.mesh.awe.constant.IntentConstant;
 import com.ws.mesh.awe.ui.adapter.ViewPagerAdapter;
 import com.ws.mesh.awe.ui.fragment.DeviceFragment;
 import com.ws.mesh.awe.ui.fragment.RoomsFragment;
@@ -44,6 +45,11 @@ public class MainActivity extends BaseActivity implements IMainView {
 
     @Override
     protected void initData() {
+        //判断是不是从登陆界面进来的 如果是跳转到添加设备界面
+        boolean formLogin = getIntent().getBooleanExtra(IntentConstant.NEED_ID, false);
+        if (formLogin){
+            pushActivity(ScanDeviceActivity.class);
+        }
         presenter = new MainPresenter(this, this);
         List<BaseFragment> mFragmentList = new ArrayList<>();
         List<String> mTitleList = new ArrayList<>();
@@ -77,6 +83,8 @@ public class MainActivity extends BaseActivity implements IMainView {
         if (viewPager.getCurrentItem() == 1){
             //添加默认房间
             presenter.addDefaultRoom();
+        }else {
+            pushActivity(ScanDeviceActivity.class);
         }
     }
 

@@ -41,7 +41,7 @@ public class DeviceContentActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        meshAddress = getIntent().getIntExtra(IntentConstant.MESH_ADDRESS, 0x00);
+        meshAddress = getIntent().getIntExtra(IntentConstant.MESH_ADDRESS, -1);
         List<BaseFragment> mFragmentList = new ArrayList<>();
         List<String> mTitleList = new ArrayList<>();
 

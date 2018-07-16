@@ -7,7 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:colorForeground">@color/gray_999</item>
+        <item name="android:colorForeground">@color/grey_999</item>
         <item name="android:windowBackground">@drawable/img_launcher</item>
     </style>
 
@@ -45,5 +45,12 @@
         <attr name="swipeEnable" format="boolean"/>
         <attr name="ios" format="boolean"/>
         <attr name="leftSwipe" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="MultiScrollNumber">
+        <attr name="primary_number" format="integer"/>
+        <attr name="target_number" format="integer"/>
+        <attr name="number_size" format="integer"/>
+        <!--<attr name="number_color" format="color"/>-->
     </declare-styleable>
 </resources>

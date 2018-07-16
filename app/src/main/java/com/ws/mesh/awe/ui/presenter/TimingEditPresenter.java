@@ -34,19 +34,19 @@ public class TimingEditPresenter {
         return mAlarmSparseArray;
     }
 
-    public void addAlarm(int hours, int mins, int sceneId, int weeknums, int meshAddress, int alarmId) {
+    public void addAlarm(int hours, int mins, int sceneId, int weekNums, int meshAddress, int alarmId) {
         SendMsg.updateDeviceTime();
-        Timing timing = packAlarm(hours, mins, sceneId, weeknums, meshAddress, alarmId);
+        Timing timing = packAlarm(hours, mins, sceneId, weekNums, meshAddress, alarmId);
         if (timing != null) {
             if (TimingDAO.getInstance().insetTiming(timing)) {
                 //发送指令
                 SendMsg.addAlarm(meshAddress, timing);
-//                mITimingEditView.addAlarm(true);
+                mITimingEditView.addAlarm(true);
             } else {
-//                mITimingEditView.addAlarm(false);
+                mITimingEditView.addAlarm(false);
             }
         } else {
-//            mITimingEditView.addAlarm(false);
+            mITimingEditView.addAlarm(false);
         }
     }
 
@@ -55,7 +55,7 @@ public class TimingEditPresenter {
         timing.mAId = alarmId == -1 ? getAlarmId() : alarmId;
         if (timing.mAId == -1) {
             //无可用Id
-//            mITimingEditView.maximumNumber();
+            mITimingEditView.maximumNumber();
             return null;
         }
 
@@ -94,7 +94,7 @@ public class TimingEditPresenter {
     }
 
     //获取当前可用闹钟id
-    public int getAlarmId() {
+    private int getAlarmId() {
         if (meshAddress < 0x8000) {
             //设备有2个定时 1 - 2
             for (int id = 1; id <= 2; id++) {

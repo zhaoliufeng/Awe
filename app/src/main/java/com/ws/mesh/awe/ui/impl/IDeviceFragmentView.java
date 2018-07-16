@@ -5,4 +5,8 @@ import com.ws.mesh.awe.bean.Device;
 public interface IDeviceFragmentView {
     void onSaveDeviceNameSuccess(Device device);
     void onSaveDeviceNameError(int errMsgId);
+
+    void onRemoveDevice(Device device);
+
+    void onError(int errMsg);
 }

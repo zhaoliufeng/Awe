@@ -18,9 +18,9 @@ import android.widget.TextView;
 
 import com.ws.mesh.awe.R;
 import com.ws.mesh.awe.base.BaseFragment;
-import com.ws.mesh.awe.bean.Device;
 import com.ws.mesh.awe.bean.Room;
 import com.ws.mesh.awe.ui.activity.DeviceContentActivity;
+import com.ws.mesh.awe.ui.activity.GroupEditDevActivity;
 import com.ws.mesh.awe.ui.adapter.RoomAdapter;
 import com.ws.mesh.awe.ui.impl.IRoomFragmentView;
 import com.ws.mesh.awe.ui.presenter.RoomPresenter;
@@ -67,13 +67,14 @@ public class RoomsFragment extends BaseFragment implements IRoomFragmentView{
 
                 @Override
                 public void onSwitch(int position, boolean isOn) {
-                    Device device = CoreData.core().mDeviceSparseArray.valueAt(position);
-                    SendMsg.switchDevice(device.mDevMeshId, isOn);
+                    Room room = CoreData.core().mRoomSparseArray.valueAt(position);
+                    SendMsg.switchDevice(room.mRoomId, isOn);
                 }
 
                 @Override
                 public void onEdit(int position) {
-                    pushActivity(DeviceContentActivity.class);
+                    Room room = CoreData.core().mRoomSparseArray.valueAt(position);
+                    pushActivityWithMeshAddress(DeviceContentActivity.class, room.mRoomId);
                 }
             };
 
@@ -105,14 +106,14 @@ public class RoomsFragment extends BaseFragment implements IRoomFragmentView{
         tvDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                presenter.deleteRoom(room);
             }
         });
 
         tvSetColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pushActivity(DeviceContentActivity.class);
+                pushActivityWithMeshAddress(DeviceContentActivity.class, room.mRoomId);
             }
         });
 
@@ -120,6 +121,7 @@ public class RoomsFragment extends BaseFragment implements IRoomFragmentView{
             @Override
             public void onClick(View v) {
                 //跳转到编辑房间界面
+                pushActivityWithMeshAddress(GroupEditDevActivity.class, room.mRoomId);
             }
         });
     }
@@ -168,7 +170,7 @@ public class RoomsFragment extends BaseFragment implements IRoomFragmentView{
                 @Override
                 public void onClick(View v) {
                     final String name = edtNewDeviceName.getText().toString().trim();
-                    presenter.saveRoomName(room, name);
+                    presenter.updateRoomName(room, name);
                 }
             });
             cancel.setOnClickListener(new View.OnClickListener() {
@@ -181,14 +183,24 @@ public class RoomsFragment extends BaseFragment implements IRoomFragmentView{
     }
 
     @Override
-    public void onSaveRoomNameSuccess(Room room) {
+    public void onUpdateRoomNameSuccess(Room room) {
         toast(R.string.tip_edit_success);
-        roomAdapter.notifyItemChanged(CoreData.core().mRoomSparseArray.indexOfKey(room.mRoomId));
+        roomAdapter.refreshRoom(room);
         renameDialog.dismiss();
     }
 
     @Override
-    public void onSaveRoomNameError(int errMsgId) {
+    public void onUpdateRoomNameError(int errMsgId) {
         toast(errMsgId);
+    }
+
+    @Override
+    public void onDeleteRoom(Room room, boolean success) {
+        if (success){
+            toast(R.string.delete_success);
+            roomAdapter.notifyDataSetChanged();
+        }else {
+            toast(R.string.delete_failed);
+        }
     }
 }

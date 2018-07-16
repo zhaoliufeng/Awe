@@ -6,6 +6,8 @@ import com.ws.mesh.awe.R;
 import com.ws.mesh.awe.bean.Device;
 import com.ws.mesh.awe.db.DeviceDAO;
 import com.ws.mesh.awe.ui.impl.IDeviceFragmentView;
+import com.ws.mesh.awe.utils.CoreData;
+import com.ws.mesh.awe.utils.SendMsg;
 
 public class DevicePresenter{
 
@@ -32,5 +34,16 @@ public class DevicePresenter{
 
     private boolean saveName(Device device) {
         return DeviceDAO.getInstance().updateDevice(device);
+    }
+
+    public void kickOutDevice(Device device){
+        if (DeviceDAO.getInstance().deleteDevice(device)){
+            CoreData.core().mDeviceSparseArray.remove(device.mDevMeshId);
+            SendMsg.kickOut(device.mDevMeshId);
+            view.onRemoveDevice(device);
+        }else {
+            view.onError(R.string.remove_failed);
+        }
+
     }
 }
