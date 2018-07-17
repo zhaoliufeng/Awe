@@ -2,6 +2,7 @@ package com.ws.mesh.awe.ui.activity;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.widget.TextView;
 
 import com.ws.mesh.awe.R;
 import com.ws.mesh.awe.base.BaseActivity;
@@ -30,6 +31,8 @@ public class DeviceContentActivity extends BaseActivity {
     ViewPager viewPager;
     @BindView(R.id.tab_title)
     TabLayout tabLayout;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
 
     private SceneFragment sceneFragment;
     private ModesFragment modesFragment;
@@ -45,6 +48,12 @@ public class DeviceContentActivity extends BaseActivity {
     @Override
     protected void initData() {
         meshAddress = getIntent().getIntExtra(IntentConstant.MESH_ADDRESS, -1);
+        if (meshAddress > 0x8000){
+            tvTitle.setText(CoreData.core().mRoomSparseArray.get(meshAddress).mRoomName);
+        }else {
+            tvTitle.setText(CoreData.core().mDeviceSparseArray.get(meshAddress).mDevName);
+        }
+
         getDeviceType();
 
         List<BaseFragment> mFragmentList = new ArrayList<>();
@@ -85,7 +94,7 @@ public class DeviceContentActivity extends BaseActivity {
     }
 
     // 0 二路 1 三路 2五路
-    private int deviceType;
+    private int deviceType = 2;
     private void getDeviceType(){
         if (meshAddress < 0x8000) {
             Device device = CoreData.core().mDeviceSparseArray.get(meshAddress);
@@ -98,6 +107,8 @@ public class DeviceContentActivity extends BaseActivity {
             }else {
                 deviceType = 2;
             }
+        }else {
+            deviceType = 2;
         }
     }
 }
