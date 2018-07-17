@@ -62,25 +62,23 @@ public class DeviceFragment extends BaseFragment implements IDeviceFragmentView{
     private DeviceAdapter.OnDeviceSelectListener onDeviceSelectListener =
             new DeviceAdapter.OnDeviceSelectListener() {
                 @Override
-                public void onSet(int position) {
-                    popWindow(getView(), position);
+                public void onSet(int deviceId) {
+                    popWindow(getView(), deviceId);
                 }
 
                 @Override
-                public void onSwitch(int position, boolean isOn) {
-                    Device device = CoreData.core().mDeviceSparseArray.valueAt(position);
-                    SendMsg.switchDevice(device.mDevMeshId, isOn);
+                public void onSwitch(int deviceId, boolean isOn) {
+                    SendMsg.switchDevice(deviceId, isOn);
                 }
 
                 @Override
-                public void onEdit(int position) {
-                    Device device = CoreData.core().mDeviceSparseArray.valueAt(position);
-                    pushActivity(DeviceContentActivity.class, device.mDevMeshId);
+                public void onEdit(int deviceId) {
+                    pushActivity(DeviceContentActivity.class, deviceId);
                 }
             };
 
     //弹窗
-    private void popWindow(View v, final int position) {
+    private void popWindow(View v, final int deviceId) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.pop_device_layout, null);
         //设置屏幕的高度和宽度
         pop = new PopupWindow(view, getScreenWidth(getActivity()),
@@ -90,7 +88,7 @@ public class DeviceFragment extends BaseFragment implements IDeviceFragmentView{
         pop.setAnimationStyle(R.style.PopupWindow_anim_style);
         pop.showAtLocation(v, Gravity.BOTTOM, 0, 0);
 
-        final Device device = CoreData.core().mDeviceSparseArray.valueAt(position);
+        final Device device = CoreData.core().mDeviceSparseArray.get(deviceId);
         TextView tvRename, tvDelete, tvSetColor;
         tvRename = view.findViewById(R.id.tv_rename);
         tvDelete = view.findViewById(R.id.tv_delete);

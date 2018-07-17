@@ -66,8 +66,6 @@ public class DeviceContentActivity extends BaseActivity {
 
         mFragmentList.add(sceneFragment);
         mTitleList.add(getString(R.string.scenes));
-        mFragmentList.add(schedularFragment);
-        mTitleList.add(getString(R.string.schedular));
 
         if (deviceType == 1){
             mFragmentList.add(modesFragment);
@@ -82,7 +80,8 @@ public class DeviceContentActivity extends BaseActivity {
             mTitleList.add(getString(R.string.colour));
         }
 
-
+        mFragmentList.add(schedularFragment);
+        mTitleList.add(getString(R.string.schedular));
         ViewPagerAdapter pagerAdapter = new ViewPagerAdapter(this.getSupportFragmentManager(), mFragmentList, mTitleList);
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);

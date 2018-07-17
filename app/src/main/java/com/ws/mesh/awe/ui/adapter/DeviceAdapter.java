@@ -44,17 +44,18 @@ public class DeviceAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, final int position) {
         DeviceViewHolder deviceViewHolder = (DeviceViewHolder) holder;
-        Device device = mDatas.valueAt(position);
+        final Device device = mDatas.valueAt(position);
         deviceViewHolder.tvDeviceName.setText(device.mDevName);
         deviceViewHolder.imgDeviceStatus.setImageResource(
                 device.mConnectionStatus == ConnectionStatus.ON ?
                         R.drawable.icon_light_on : R.drawable.icon_light_off);
+        deviceViewHolder.swcOnOff.setOnCheckedChangeListener(null);
         deviceViewHolder.swcOnOff.setChecked(device.mConnectionStatus == ConnectionStatus.ON);
         deviceViewHolder.swcOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (onDeviceSelectListener != null)
-                    onDeviceSelectListener.onSwitch(position, isChecked);
+                    onDeviceSelectListener.onSwitch(device.mDevMeshId, isChecked);
             }
         });
 
@@ -62,7 +63,7 @@ public class DeviceAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 if (onDeviceSelectListener != null)
-                    onDeviceSelectListener.onSet(position);
+                    onDeviceSelectListener.onSet(device.mDevMeshId);
             }
         });
 
@@ -70,7 +71,7 @@ public class DeviceAdapter extends RecyclerView.Adapter {
             @Override
             public boolean onLongClick(View v) {
                 if (onDeviceSelectListener != null)
-                    onDeviceSelectListener.onEdit(position);
+                    onDeviceSelectListener.onEdit(device.mDevMeshId);
                 return true;
             }
         });
@@ -111,11 +112,11 @@ public class DeviceAdapter extends RecyclerView.Adapter {
     }
 
     public interface OnDeviceSelectListener {
-        void onSet(int position);
+        void onSet(int deviceId);
 
-        void onSwitch(int position, boolean isOn);
+        void onSwitch(int deviceId, boolean isOn);
 
-        void onEdit(int position);
+        void onEdit(int deviceId);
     }
 
     class DeviceViewHolder extends RecyclerView.ViewHolder {
