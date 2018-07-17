@@ -111,4 +111,20 @@
     <string name="yes">Yes</string>
     <string name="remove_failed">Remove Failed</string>
     <string name="remove_success">Remove Success</string>
+    <string name="about_awe_content"><b>Bajaj Awe: Beyond Smart Lighting – transform the lighting experience</b>\n\n
+        Smart LED bulbs paired with mobile phones via Bluetooth and controlled by Bajaj Awe App. It can create Millions of colors with predefined color representation and/or functionalities, Human Centric Healthy lighting with pre-defined modes, Individual choices for user like celebration/ scheduler etc.\n\n
+Bajaj Awe bulb is a 7W Led bulb and is one of the smart products in Bajaj’s increasing IoT portfolio. With a better lifespan it offers millions of colours (RGB and Dynamic white light appearance along with different intensity doses). It is compatible with devices running on Android and iOS. \n\n
+        It provides customized lighting according to the user’s requirement. These bulbs allow the user to choose and control any color depending on the situation, time or mood by pairing the bulb with mobile App via Bluetooth. Preset controls are also provided for certain modes like reading, relaxing etc. that cover the colour spectrums addressing the healthy aspect of lighting. \n\n
+        Powered by Bluetooth mesh topology, it can be retrofitted into an existing lamp holder (Buyonet Cap or Edission screw type) without the need for a hub or extra hardware. An intuitive and seamless system, Awe’s firmware is upgradeable and future-proof.
+    </string>
+    <string name="about_us_content"><b>“Enhancing quality of life and bringing happiness with sustainability”</b>\n\n
+Bajaj Electricals Limited (BEL), a globally renowned and trusted company, with a turnaround of ₹4298 crores (FY 16-17), is a part of "Bajaj Group". Bajaj Electricals business is spread across – Consumer Products (Appliances, Fans, Lighting), Exports, Luminaires and EPC (Illumination, Transmission Towers and Power Distribution). Bajaj Electricals has 19 branch offices spread in different parts of the country besides being supported by a chain of distributors, authorized dealers, retail outlets, exclusive showrooms called ‘Bajaj World’ and approximately 462 customer care centers. We also have a presence in the hi-end range of appliances with brands like Platini and Morphy Richards in India.\n\n
+Read more at https://www.bajajelectricals.com/
+</string>
+    <string name="support_content">In case of consumer complaint please contact\n\n
+the Officer-in-Charge on : Tel. No. 022-24064400\n\n
+or Email : <u>consumercare@bajajelectricals.com</u>\n\n
+<u>https://www.facebook.com/BajajElectricals</u>\n\n
+<u>https://twitter.com/BajajElectricals</u>
+</string>
 </resources>

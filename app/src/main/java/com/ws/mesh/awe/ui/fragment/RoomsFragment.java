@@ -38,6 +38,7 @@ public class RoomsFragment extends BaseFragment implements IRoomFragmentView{
     private RoomPresenter presenter;
 
     private AlertDialog renameDialog;
+    private PopupWindow pop;
 
     @Override
     protected int getLayoutId() {
@@ -74,7 +75,7 @@ public class RoomsFragment extends BaseFragment implements IRoomFragmentView{
                 @Override
                 public void onEdit(int position) {
                     Room room = CoreData.core().mRoomSparseArray.valueAt(position);
-                    pushActivityWithMeshAddress(DeviceContentActivity.class, room.mRoomId);
+                    pushActivity(DeviceContentActivity.class, room.mRoomId);
                 }
             };
 
@@ -82,7 +83,7 @@ public class RoomsFragment extends BaseFragment implements IRoomFragmentView{
     private void popWindow(View v, final int position) {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.pop_room_layout, null);
         //设置屏幕的高度和宽度
-        final PopupWindow pop = new PopupWindow(view, getScreenWidth(getActivity()),
+        pop = new PopupWindow(view, getScreenWidth(getActivity()),
                 (int) (getScreenHeight(getActivity()) / 3.6f));
         pop.setBackgroundDrawable(getResources().getDrawable(R.drawable.pop_background));
         pop.setOutsideTouchable(true);
@@ -107,13 +108,15 @@ public class RoomsFragment extends BaseFragment implements IRoomFragmentView{
             @Override
             public void onClick(View v) {
                 presenter.deleteRoom(room);
+                pop.dismiss();
             }
         });
 
         tvSetColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pushActivityWithMeshAddress(DeviceContentActivity.class, room.mRoomId);
+                pushActivity(DeviceContentActivity.class, room.mRoomId);
+                pop.dismiss();
             }
         });
 
@@ -121,7 +124,8 @@ public class RoomsFragment extends BaseFragment implements IRoomFragmentView{
             @Override
             public void onClick(View v) {
                 //跳转到编辑房间界面
-                pushActivityWithMeshAddress(GroupEditDevActivity.class, room.mRoomId);
+                pushActivity(GroupEditDevActivity.class, room.mRoomId);
+                pop.dismiss();
             }
         });
     }

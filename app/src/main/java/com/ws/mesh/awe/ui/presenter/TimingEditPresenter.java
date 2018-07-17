@@ -29,9 +29,8 @@ public class TimingEditPresenter {
         getAlarmList();
     }
 
-    private SparseArray<Timing> getAlarmList() {
+    private void getAlarmList() {
         mAlarmSparseArray = TimingDAO.getInstance().queryTiming(meshAddress);
-        return mAlarmSparseArray;
     }
 
     public void addAlarm(int hours, int mins, int sceneId, int weekNums, int meshAddress, int alarmId) {
@@ -45,8 +44,6 @@ public class TimingEditPresenter {
             } else {
                 mITimingEditView.addAlarm(false);
             }
-        } else {
-            mITimingEditView.addAlarm(false);
         }
     }
 
@@ -96,15 +93,15 @@ public class TimingEditPresenter {
     //获取当前可用闹钟id
     private int getAlarmId() {
         if (meshAddress < 0x8000) {
-            //设备有2个定时 1 - 2
-            for (int id = 1; id <= 2; id++) {
+            //设备有4个定时 1 - 4
+            for (int id = 1; id <= 4; id++) {
                 if (mAlarmSparseArray.get(id) == null) {
                     return id;
                 }
             }
         } else {
-            //房间有4个定时 3 - 6
-            for (int id = 3; id <= 6; id++) {
+            //房间有10个定时 3 - 12
+            for (int id = 3; id <= 12; id++) {
                 if (mAlarmSparseArray.get(id) == null) {
                     return id;
                 }

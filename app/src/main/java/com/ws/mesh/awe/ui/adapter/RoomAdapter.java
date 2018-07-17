@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
 
 public class RoomAdapter extends RecyclerView.Adapter {
 
-    SparseArray<Room> mDatas;
+    private SparseArray<Room> mDatas;
 
     public RoomAdapter(SparseArray<Room> roomSparseArray) {
         mDatas = roomSparseArray;
@@ -39,6 +39,8 @@ public class RoomAdapter extends RecyclerView.Adapter {
         RoomViewHolder deviceViewHolder = (RoomViewHolder) holder;
         Room room = mDatas.valueAt(position);
         deviceViewHolder.tvDeviceName.setText(room.mRoomName);
+        //房间默认打开
+        deviceViewHolder.swcOnOff.setChecked(true);
         deviceViewHolder.swcOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

@@ -43,9 +43,15 @@ public abstract class BaseFragment extends Fragment {
         startActivity(new Intent(getActivity(), clazz));
     }
 
-    public void pushActivityWithMeshAddress(Class<?> clazz, int meshAddress){
+    public void pushActivity(Class<?> clazz, int meshAddress){
         startActivity(new Intent(getActivity(), clazz)
                 .putExtra(IntentConstant.MESH_ADDRESS, meshAddress));
+    }
+
+    public void pushActivity(Class<?> clazz, int meshAddress, int alarmId){
+        startActivity(new Intent(getActivity(), clazz)
+                .putExtra(IntentConstant.MESH_ADDRESS, meshAddress)
+                .putExtra(IntentConstant.ALARM_ID, alarmId));
     }
     @Override
     public void onDestroyView() {

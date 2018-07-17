@@ -23,7 +23,7 @@ public class SchedularPresenter {
         getAlarmList();
     }
 
-    private void getAlarmList() {
+    public void getAlarmList() {
         mAlarmSparseArray = TimingDAO.getInstance().queryTiming(mMeshAddress);
     }
 
@@ -49,9 +49,9 @@ public class SchedularPresenter {
             }
             setAlarm(alarm);
             if (TimingDAO.getInstance().updateTiming(alarm)){
-                view.openAlarm(true);
+                view.openAlarm(alarmId,true);
             }else {
-                view.openAlarm(false);
+                view.openAlarm(alarmId,false);
             }
         }
     }
@@ -71,6 +71,21 @@ public class SchedularPresenter {
             } else {
                 view.closeAlarm(false);
             }
+        }
+    }
+
+    /**
+     * 删除定时
+     *
+     * @param alarmId 定时id
+     */
+    public void deleteAlarm(int alarmId) {
+        if (TimingDAO.getInstance().deleteTiming(mAlarmSparseArray.get(alarmId))) {
+            SendMsg.deleteAlarm(mMeshAddress, alarmId);
+            mAlarmSparseArray.remove(alarmId);
+            view.deleteAlarm(true);
+        } else {
+            view.deleteAlarm(false);
         }
     }
 

@@ -16,6 +16,7 @@ import android.widget.TimePicker;
 import com.ws.mesh.awe.R;
 import com.ws.mesh.awe.base.BaseActivity;
 import com.ws.mesh.awe.bean.Device;
+import com.ws.mesh.awe.bean.Timing;
 import com.ws.mesh.awe.constant.DeviceChannel;
 import com.ws.mesh.awe.constant.IntentConstant;
 import com.ws.mesh.awe.ui.impl.ITimingEditView;
@@ -67,6 +68,23 @@ public class TimingEditActivity extends BaseActivity implements ITimingEditView 
         alarmId = getIntent().getIntExtra(IntentConstant.ALARM_ID, -1);
         meshAddress = getIntent().getIntExtra(IntentConstant.MESH_ADDRESS, -1);
         presenter.init(meshAddress);
+
+        if (alarmId != -1){
+            //编辑定时
+            Timing timing = presenter.mAlarmSparseArray.get(alarmId);
+            weekNum = timing.mWeekNum;
+            hour = timing.mHours;
+            minutes = timing.mMins;
+            eventId = timing.mAlarmEvent;
+            position = eventId;
+
+            tpTime.setCurrentHour(hour);
+            tpTime.setCurrentMinute(minutes);
+            tvEvents.setText(presenter.getExecuteEvent(eventId));
+        }else {
+            hour = tpTime.getCurrentHour();
+            minutes = tpTime.getCurrentMinute();
+        }
 
         tpTime.setOnTimeChangedListener(onTimeChangedListener);
         if (weekNum == 0) {

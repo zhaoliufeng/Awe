@@ -1,11 +1,9 @@
 package com.ws.mesh.awe.ui.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,15 +19,12 @@ import android.widget.TextView;
 import com.ws.mesh.awe.R;
 import com.ws.mesh.awe.base.BaseFragment;
 import com.ws.mesh.awe.bean.Device;
-import com.ws.mesh.awe.db.DeviceDAO;
 import com.ws.mesh.awe.ui.activity.DeviceContentActivity;
 import com.ws.mesh.awe.ui.adapter.DeviceAdapter;
 import com.ws.mesh.awe.ui.impl.IDeviceFragmentView;
 import com.ws.mesh.awe.ui.presenter.DevicePresenter;
 import com.ws.mesh.awe.utils.CoreData;
 import com.ws.mesh.awe.utils.SendMsg;
-
-import org.w3c.dom.Text;
 
 import butterknife.BindView;
 
@@ -80,7 +75,7 @@ public class DeviceFragment extends BaseFragment implements IDeviceFragmentView{
                 @Override
                 public void onEdit(int position) {
                     Device device = CoreData.core().mDeviceSparseArray.valueAt(position);
-                    pushActivityWithMeshAddress(DeviceContentActivity.class, device.mDevMeshId);
+                    pushActivity(DeviceContentActivity.class, device.mDevMeshId);
                 }
             };
 
@@ -112,13 +107,15 @@ public class DeviceFragment extends BaseFragment implements IDeviceFragmentView{
             @Override
             public void onClick(View v) {
                 presenter.kickOutDevice(device);
+                pop.dismiss();
             }
         });
 
         tvSetColor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pushActivityWithMeshAddress(DeviceContentActivity.class, device.mDevMeshId);
+                pushActivity(DeviceContentActivity.class, device.mDevMeshId);
+                pop.dismiss();
             }
         });
     }

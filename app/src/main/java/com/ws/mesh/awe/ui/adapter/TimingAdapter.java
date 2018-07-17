@@ -2,6 +2,7 @@ package com.ws.mesh.awe.ui.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.util.SparseArray;
@@ -22,30 +23,35 @@ import com.ws.mesh.awe.views.SwipeMenuLayout;
 
 public class TimingAdapter extends RecyclerView.Adapter {
     private SparseArray<Timing> mDatas;
-    private Activity mContext;
+    private Context mContext;
     private RecyclerView mRecyclerView;
     private OnTimingSelectListener mOnTimingSelectListener = new OnTimingSelectListener() {
-        @Override
-        public void onItemSelect(int position) {
-
-        }
-
         @Override
         public void onSwitchTiming(boolean isOpen, int position) {
 
         }
+
+        @Override
+        public void onEdit(int position) {
+
+        }
+
+        @Override
+        public void onDelete(int position) {
+
+        }
     };
 
-    public TimingAdapter(Activity context, SparseArray<Timing> datas) {
+    public TimingAdapter(SparseArray<Timing> datas) {
         mDatas = datas;
-        mContext = context;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        mContext = parent.getContext();
+        mRecyclerView = (RecyclerView) parent;
         View view = LayoutInflater.from(mContext).inflate(
                 R.layout.item_timing, parent, false);
-        mRecyclerView = (RecyclerView) parent;
         return new TimingViewHolder(view);
     }
 
@@ -61,15 +67,17 @@ public class TimingAdapter extends RecyclerView.Adapter {
         viewHolder.mSwitchExecute.setOnCheckedChangeListener(null);
         viewHolder.mSwitchExecute.setChecked(alarm.mIsOpen);
 
-        String timingEvent = mContext.getResources().getStringArray(R.array.timing_events)[alarm.mAlarmEvent];
+        String timingEvent = getExecuteEvent(alarm.mAlarmEvent);
         viewHolder.mTvExecuteWeek.setText(String.format("%s,%s", getExecuteInfo(alarm.mWeekNum), timingEvent));
 
         viewHolder.mSwitchExecute.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (viewHolder.mSwitchExecute.isChecked()) {
+                    alarm.mIsOpen = true;
                     mOnTimingSelectListener.onSwitchTiming(true, position);
                 } else {
+                    alarm.mIsOpen = false;
                     mOnTimingSelectListener.onSwitchTiming(false, position);
                 }
                 if (mRecyclerView.getScrollState() == RecyclerView.SCROLL_STATE_IDLE
@@ -82,6 +90,7 @@ public class TimingAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 viewHolder.mSwipeMenu.smoothClose();
+                mOnTimingSelectListener.onEdit(position);
             }
         });
 
@@ -89,6 +98,7 @@ public class TimingAdapter extends RecyclerView.Adapter {
             @Override
             public void onClick(View v) {
                 viewHolder.mSwipeMenu.smoothClose();
+                mOnTimingSelectListener.onDelete(position);
             }
         });
     }
@@ -150,9 +160,11 @@ public class TimingAdapter extends RecyclerView.Adapter {
     }
 
     public interface OnTimingSelectListener {
-        void onItemSelect(int position);
-
         void onSwitchTiming(boolean isOpen, int position);
+
+        void onEdit(int position);
+
+        void onDelete(int position);
     }
 
     public void setOnTimingSelectListener(OnTimingSelectListener listener) {

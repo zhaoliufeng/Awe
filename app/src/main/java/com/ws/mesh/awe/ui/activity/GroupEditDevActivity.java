@@ -108,6 +108,11 @@ public class GroupEditDevActivity extends BaseActivity {
         finish();
     }
 
+    @OnClick(R.id.tv_confirm)
+    public void onConfirm(){
+        finish();
+    }
+
     private class DeviceAddedAdapter extends RecyclerView.Adapter {
         private Context mContext;
 
