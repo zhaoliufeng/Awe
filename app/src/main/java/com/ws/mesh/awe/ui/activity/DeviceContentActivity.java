@@ -67,10 +67,10 @@ public class DeviceContentActivity extends BaseActivity {
         mFragmentList.add(sceneFragment);
         mTitleList.add(getString(R.string.scenes));
 
-        if (deviceType == 1){
+        if (deviceType == 0){
             mFragmentList.add(modesFragment);
             mTitleList.add(getString(R.string.modes));
-        }else if (deviceType == 2){
+        }else if (deviceType == 1){
             mFragmentList.add(colourFragment);
             mTitleList.add(getString(R.string.colour));
         }else {
