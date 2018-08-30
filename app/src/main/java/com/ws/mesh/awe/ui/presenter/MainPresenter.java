@@ -83,6 +83,7 @@ public class MainPresenter implements EventListener<String>{
                         autoConnect();
                         break;
                     case BluetoothAdapter.STATE_OFF:
+                        mIPrimaryView.bleClose();
                         mIPrimaryView.onLoginOut();
                         break;
                 }
@@ -350,7 +351,7 @@ public class MainPresenter implements EventListener<String>{
     public void addDefaultRoom(){
         Room room = new Room();
         room.mRoomId = getRoomId();
-        room.mRoomName = "Room-" + (room.mRoomId - AppConstant.ROOM_START_ID);
+        room.mRoomName = "Room-" + (room.mRoomId - AppConstant.ROOM_START_ID + 1);
         room.mDeviceIds = new SparseArray<>();
         CoreData.core().mRoomSparseArray.append(room.mRoomId, room);
         if (RoomDAO.getInstance().insertRoom(room)){
@@ -368,5 +369,17 @@ public class MainPresenter implements EventListener<String>{
             }
         }
         return -1;
+    }
+
+    //开启蓝牙
+    public void openBluetooth(){
+        BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
+        if (adapter == null){
+
+        }else {
+            if (!adapter.isEnabled()){
+                adapter.enable();
+            }
+        }
     }
 }

@@ -1,5 +1,7 @@
 package com.ws.mesh.awe.ui.presenter;
 
+import android.support.annotation.Nullable;
+
 import com.ws.mesh.awe.constant.AppConstant;
 import com.ws.mesh.awe.constant.DeviceChannel;
 import com.ws.mesh.awe.ui.impl.IWarmColdView;
@@ -24,7 +26,11 @@ public class WarmColdPresenter {
         setControlType();
     }
 
-    public void controlWarmCold(int warm, boolean isUp, boolean isChangeMode) {
+    /**
+     * 控制颜色 亮度
+     * @param brightness 亮度 0.0f - 1.0f
+     */
+    public void controlWarmCold(int warm, float brightness, boolean isUp, boolean isChangeMode) {
         byte validBit = (byte) 0x1F;
         switch (mChannelType) {
             case DeviceChannel.LIGHT_FIVE_RGBWC_CHANNEL:
@@ -51,10 +57,10 @@ public class WarmColdPresenter {
         }
 
         if (isUp) {
-            SendMsg.setDevColor(meshAddress, 0, warm, 255 - warm, isChangeMode, validBit);
+            SendMsg.setDevColor(meshAddress, 0, warm, 255 - warm, (int) (100 * brightness), isChangeMode, validBit);
         } else {
             if (mGap.isPassNext()) {
-                SendMsg.setDevColor(meshAddress, 0, warm, 255 - warm, isChangeMode, validBit);
+                SendMsg.setDevColor(meshAddress, 0, warm, 255 - warm, (int) (100 * brightness), isChangeMode, validBit);
             }
         }
     }

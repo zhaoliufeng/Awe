@@ -16,8 +16,8 @@
     <string name="tip_edit_failed">edit failed</string>
     <string name="tip_name_can_not_null">name cannot be null</string>
     <string name="tip_all_device_name_reminder">The name for all device names cannot be used as a single device name</string>
-    <string name="scenes">Scenes</string>
-    <string name="modes">Modes</string>
+    <string name="scenes">Ambience</string>
+    <string name="modes">Moods</string>
     <string name="colour">Colour</string>
     <string name="schedular">Schedular</string>
     <!--Scene-->
@@ -35,9 +35,12 @@
     <string name="scene_visual_alarm">Visual Alarm</string>
     <string name="intensity">Intensity</string>
     <string name="_0">0</string>
+    <string name="_100">100</string>
     <!--Modes-->
     <string name="relax">Relax</string>
     <string name="active">Active</string>
+    <string name="wake_up">WakeUp</string>
+    <string name="energise">Energise</string>
     <string name="reading_mode">Reading Mode</string>
     <string name="concentration">Concentration</string>
     <string name="alert">Alert</string>
@@ -48,6 +51,10 @@
     <string name="cyan">Cyan</string>
     <string name="blue">Blue</string>
     <string name="purple">Purple</string>
+    <string name="magenta">Magenta</string>
+    <string name="mauve">Mauve</string>
+    <string name="teal">Teal</string>
+
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
     <string name="add_failed">add failed</string>
@@ -128,4 +135,8 @@ or Email : <u>consumercare@bajajelectricals.com</u>\n\n
 <u>https://twitter.com/BajajElectricals</u>
 </string>
     <string name="scan_device">Scan Device</string>
+
+    <string name="no_locate_permission">Location permission is not available</string>
+    <string name="tip_no_locate_permission">The current user has denied the permission application and will not be able to continue without this permission</string>
+    <string name="open_bluetooth">Open BlueTooth</string>
 </resources>

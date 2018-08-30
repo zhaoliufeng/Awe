@@ -28,4 +28,7 @@ public interface IMainView {
 
     //添加房间
     void addRoom(boolean success);
+
+    //蓝牙关闭
+    void bleClose();
 }

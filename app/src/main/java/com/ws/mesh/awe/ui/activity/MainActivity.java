@@ -1,11 +1,13 @@
 package com.ws.mesh.awe.ui.activity;
 
+import android.app.AlertDialog;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 
 import com.ws.mesh.awe.R;
 import com.ws.mesh.awe.base.BaseActivity;
@@ -106,12 +108,12 @@ public class MainActivity extends BaseActivity implements IMainView {
 
     @Override
     public void onFindDevice() {
-        toast("正在连接设备");
+        toast("Connecting Device");
     }
 
     @Override
     public void onLoginSuccess() {
-        toast("设备连接成功");
+        toast("Connect Device Success");
     }
 
     @Override
@@ -158,5 +160,10 @@ public class MainActivity extends BaseActivity implements IMainView {
         } else {
             toast(R.string.add_failed);
         }
+    }
+
+    @Override
+    public void bleClose() {
+        presenter.checkBle();
     }
 }

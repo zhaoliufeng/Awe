@@ -36,16 +36,16 @@ public class ColourFragment extends BaseFragment implements IColourView{
 
     private int color;
 
-    private int[] colourTitle = new int[]{R.string.red, R.string.yellow, R.string.green,
-            R.string.cyan, R.string.blue, R.string.purple};
+    private int[] colourTitle = new int[]{R.string.magenta, R.string.yellow, R.string.mauve,
+            R.string.teal, R.string.cyan, R.string.blue};
 
-    private int[] colourIcon = new int[]{R.drawable.icon_colour_red, R.drawable.icon_colour_yellow, R.drawable.icon_colour_green,
-            R.drawable.icon_colour_cyan, R.drawable.icon_colour_blue, R.drawable.icon_colour_purple};
+    private int[] colourIcon = new int[]{R.drawable.icon_colour_magenta, R.drawable.icon_colour_yellow, R.drawable.icon_colour_mauve,
+            R.drawable.icon_colour_teal, R.drawable.icon_colour_cyan, R.drawable.icon_colour_blue};
 
     private IconTitleGridAdapter colourGridAdapter;
     private int meshAddress;
     private ColourPresenter presenter;
-    private String[] colorSet = {"#FF0000", "#FFFF00", "#00FF00", "#00FFFF", "#0000FF", "#7E00FE"};
+    private String[] colorSet = {"#EC008C", "#D7DF23", "#8E4D9E", "#2BB673", "#00A79D", "#1B75BC"};
 
     @Override
     protected int getLayoutId() {

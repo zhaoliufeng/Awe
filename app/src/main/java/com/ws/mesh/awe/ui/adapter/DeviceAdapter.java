@@ -51,6 +51,15 @@ public class DeviceAdapter extends RecyclerView.Adapter {
                         R.drawable.icon_light_on : R.drawable.icon_light_off);
         deviceViewHolder.swcOnOff.setOnCheckedChangeListener(null);
         deviceViewHolder.swcOnOff.setChecked(device.mConnectionStatus == ConnectionStatus.ON);
+
+        deviceViewHolder.imgDeviceStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onDeviceSelectListener != null)
+                    onDeviceSelectListener.onSwitch(device.mDevMeshId,
+                            device.mConnectionStatus != ConnectionStatus.ON);
+            }
+        });
         deviceViewHolder.swcOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

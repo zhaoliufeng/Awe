@@ -1,9 +1,16 @@
 package com.ws.mesh.awe.ui.presenter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.text.TextUtils;
 import android.util.SparseArray;
 
+import com.telink.bluetooth.LeBluetooth;
 import com.telink.bluetooth.WeSmartLog;
 import com.telink.bluetooth.event.DeviceEvent;
 import com.telink.bluetooth.event.LeScanEvent;
@@ -19,6 +26,7 @@ import com.telink.util.EventListener;
 import com.ws.mesh.awe.MeshApplication;
 import com.ws.mesh.awe.R;
 import com.ws.mesh.awe.bean.Device;
+import com.ws.mesh.awe.constant.AppConstant;
 import com.ws.mesh.awe.constant.DeviceForm;
 import com.ws.mesh.awe.db.DeviceDAO;
 import com.ws.mesh.awe.service.TelinkLightService;
@@ -40,7 +48,25 @@ public class ScanDevicePresenter implements EventListener<String> {
     private SparseArray<Device> mDeviceSparseArray = new SparseArray<>();
     private HashMap<String, DeviceInfo> mAllDevice = new HashMap<>();
 
-
+    //监听蓝牙数据
+    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
+                int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, 0);
+                switch (state) {
+                    case BluetoothAdapter.STATE_ON:
+                        startScan(1000);
+                        break;
+                    case BluetoothAdapter.STATE_OFF:
+                        //蓝牙关闭
+                        view.onStopScan();
+                        break;
+                }
+            }
+        }
+    };
     private volatile int mMeshAddress;
 
     private IScanDeviceView view;
@@ -48,6 +74,17 @@ public class ScanDevicePresenter implements EventListener<String> {
     public ScanDevicePresenter(IScanDeviceView view) {
         this.view = view;
         addListener();
+        registerReceiver();
+    }
+
+    public void checkBle(Activity activity) {
+        BluetoothAdapter mBluetoothAdapter = LeBluetooth.getInstance().getAdapter(MeshApplication.getInstance());
+        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            activity.startActivityForResult(enableBtIntent, 1);
+        } else {
+            startScan(1000);
+        }
     }
 
     private void addListener() {
@@ -56,6 +93,13 @@ public class ScanDevicePresenter implements EventListener<String> {
         MeshApplication.getInstance().addEventListener(DeviceEvent.STATUS_CHANGED, this);
         MeshApplication.getInstance().addEventListener(MeshEvent.UPDATE_COMPLETED, this);
         MeshApplication.getInstance().addEventListener(MeshEvent.ERROR, this);
+    }
+
+    private void registerReceiver() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
+        filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY - 1);
+        MeshApplication.getInstance().registerReceiver(mReceiver, filter);
     }
 
     /**
@@ -144,7 +188,12 @@ public class ScanDevicePresenter implements EventListener<String> {
                     Device device = new Device();
                     device.mConnectionStatus = ConnectionStatus.OFFLINE;
                     device.mDevMeshId = deviceInfo.meshAddress;
-                    device.mDevType = mAllDevice.get(deviceInfo.macAddress).meshUUID;
+                    if (mAllDevice.get(deviceInfo.macAddress) == null){
+                        device.mDevType = AppConstant.DEFAULT_TYPE;
+                    }else {
+                        device.mDevType = mAllDevice.get(deviceInfo.macAddress).meshUUID;
+                    }
+
                     device.mDevName = String.format("Device-%d", device.mDevMeshId);
                     device.mDevMacAddress = deviceInfo.macAddress;
                     DeviceDAO.getInstance().insertDevice(device);
@@ -181,5 +230,12 @@ public class ScanDevicePresenter implements EventListener<String> {
                 TelinkLightService.Instance().startScan(params);
             }
         }, delay);
+    }
+
+    public void destroy() {
+        MeshApplication.getInstance().removeEventListener(this);
+        MeshApplication.getInstance().unregisterReceiver(mReceiver);
+        mAllDevice = null;
+        mReceiver = null;
     }
 }

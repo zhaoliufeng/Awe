@@ -1,10 +1,5 @@
 package com.ws.mesh.awe.ui.activity;
 
-import android.bluetooth.BluetoothAdapter;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.support.v7.app.AlertDialog;
 import android.util.SparseArray;
 import android.view.View;
@@ -13,11 +8,10 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.telink.bluetooth.LeBluetooth;
 import com.ws.mesh.awe.R;
 import com.ws.mesh.awe.base.BaseActivity;
 import com.ws.mesh.awe.bean.Device;
-import com.ws.mesh.awe.service.TelinkLightService;
+import com.ws.mesh.awe.constant.IntentConstant;
 import com.ws.mesh.awe.ui.adapter.ScanAddDeviceAdapter;
 import com.ws.mesh.awe.ui.impl.IScanDeviceView;
 import com.ws.mesh.awe.ui.presenter.ScanDevicePresenter;
@@ -40,26 +34,7 @@ public class ScanDeviceActivity extends BaseActivity implements IScanDeviceView 
 
     private ScanAddDeviceAdapter mDeviceAdapter;
     private ScanDevicePresenter presenter;
-
-    private BroadcastReceiver mReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if (BluetoothAdapter.ACTION_STATE_CHANGED.equals(action)) {
-                int state = intent.getIntExtra(BluetoothAdapter.EXTRA_STATE, 0);
-                switch (state) {
-                    case BluetoothAdapter.STATE_ON:
-                        TelinkLightService.Instance().idleMode(true);
-                        presenter.startScan(1000);
-                        break;
-                    case BluetoothAdapter.STATE_OFF:
-                        //蓝牙关闭
-                        mCurrStatus.setText(getString(R.string.ble_close));
-                        break;
-                }
-            }
-        }
-    };
+    private boolean formLogin;
 
     @Override
     protected int getLayoutId() {
@@ -68,27 +43,25 @@ public class ScanDeviceActivity extends BaseActivity implements IScanDeviceView 
 
     @Override
     protected void initData() {
+        formLogin = getIntent().getBooleanExtra(IntentConstant.NEED_ID, false);
         presenter = new ScanDevicePresenter(this);
-        registerReceiver();
         mDeviceAdapter = new ScanAddDeviceAdapter(this);
         mGridView.setAdapter(mDeviceAdapter);
         CoreData.mAddDeviceMode = true;
-        onJudgeBLE();
+        presenter.checkBle(this);
     }
 
     @OnClick(R.id.img_back)
     void OnBack(){
+        if (formLogin){
+            pushActivity(MainActivity.class);
+        }
         finish();
     }
 
-    private void onJudgeBLE() {
-        BluetoothAdapter mBluetoothAdapter = LeBluetooth.getInstance().getAdapter(this);
-        if (mBluetoothAdapter == null || !mBluetoothAdapter.isEnabled()) {
-            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBtIntent, 1);
-        } else {
-            presenter.startScan(500);
-        }
+    @Override
+    public void onBackPressed() {
+        OnBack();
     }
 
     @Override
@@ -143,10 +116,15 @@ public class ScanDeviceActivity extends BaseActivity implements IScanDeviceView 
 
     }
 
-    private void registerReceiver() {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-        filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY - 1);
-        registerReceiver(mReceiver, filter);
+    @Override
+    public void onStopScan() {
+        mCurrStatus.setText(getString(R.string.ble_close));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        CoreData.mAddDeviceMode = false;
+        presenter.destroy();
     }
 }

@@ -129,6 +129,12 @@ public class SendMsg {
         sendCommonMsg(meshAddress, Opcode.BLE_GATT_OP_CTRL_E2.getValue(), params);
     }
 
+    public static void setDevColor(int meshAddress, int color, int warm, int cold, int brightness, boolean isChangeMode, byte validBit) {
+        byte params[] = new byte[]{0x09, (byte) Color.red(color), (byte) Color.green(color), (byte) Color.blue(color),
+                (byte) warm, (byte) cold, (byte) brightness, (byte) (isChangeMode ? 1 : 0), validBit};
+        sendCommonMsg(meshAddress, Opcode.BLE_GATT_OP_CTRL_E2.getValue(), params);
+    }
+
     public static void setDevBrightness(int meshAddress, int brightness) {
         if (brightness <= 3) {
             switchDevice(meshAddress, false);

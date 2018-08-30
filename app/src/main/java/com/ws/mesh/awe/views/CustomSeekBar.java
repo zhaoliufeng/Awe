@@ -110,6 +110,10 @@ public class CustomSeekBar extends ViewGroup implements View.OnTouchListener {
         ivBackground.measure(wSpec, backgroundHeight);
     }
 
+    /**
+     * 设置当前滑块位置
+     * @param position 0 - 1 float
+     */
     public void setPosition(float position, boolean genCallback) {
         if (position < 0 || position > 1) return;
         float x = (getWidth() - getHeight()) * position;

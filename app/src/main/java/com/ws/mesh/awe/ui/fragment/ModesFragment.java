@@ -19,6 +19,8 @@ import butterknife.BindView;
 public class ModesFragment extends BaseFragment implements IWarmColdView {
 
     private static final String TAG = "ModesFragment";
+    //固件收到大于 100 的亮度值不做处理
+    private final float INVALID_BRIGHTNESS = 1.1f;
     @BindView(R.id.cp_warm_cold)
     ColorPickView cpWarmCold;
     @BindView(R.id.sb_brightness)
@@ -31,13 +33,14 @@ public class ModesFragment extends BaseFragment implements IWarmColdView {
     private IconTitleGridAdapter modesGridAdapter;
     private WarmColdPresenter presenter;
 
-    private int[] modeTitle = new int[]{R.string.relax, R.string.reading_mode,
-            R.string.concentration, R.string.alert};
+    private int[] modeTitle = new int[]{R.string.wake_up, R.string.energise,
+            R.string.concentration, R.string.relax};
 
-    private int[] modeIcon = new int[]{R.drawable.icon_mode_relax, R.drawable.icon_mode_reading_mode,
-            R.drawable.icon_mode_concentration, R.drawable.icon_mode_alert};
+    private int[] modeIcon = new int[]{R.drawable.icon_mode_wake_up, R.drawable.icon_mode_active,
+            R.drawable.icon_mode_concentration, R.drawable.icon_mode_relax};
 
-    private float[] modes = {0.0f, 0.1f, 0.2f, 0.625f};
+    private float[] modes = {0.31f, 0.83f, 0.42f, 0.21f};
+    private float[] brightness = {0.7f, 1.0f, 1.0f, 0.8f};
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_modes;
@@ -53,9 +56,10 @@ public class ModesFragment extends BaseFragment implements IWarmColdView {
             @Override
             public void OnItemSelected(int position) {
                 Log.i(TAG, "OnItemSelected: position -> " + position);
-                presenter.controlWarmCold((int) (255f * (1 - modes[position])), true, true);
+                presenter.controlWarmCold((int) (255f * (1 - modes[position])), brightness[position],true, true);
                 float hsb[] = new float[]{ 90.0f, 255f * modes[position] / 255.0f, 1.0f };
                 cpWarmCold.setPoint(hsb);
+                sbBrightness.setPosition(brightness[position]);
             }
         });
 
@@ -69,10 +73,11 @@ public class ModesFragment extends BaseFragment implements IWarmColdView {
             public void onColorChange(float[] hsb, boolean reqUpdate) {
                 //暖白
                 mColdValues = (int) (255 * hsb[ 1 ]);
-                presenter.controlWarmCold(255 - mColdValues, reqUpdate, true);
+                presenter.controlWarmCold(255 - mColdValues, INVALID_BRIGHTNESS, reqUpdate, true);
                 Log.i(TAG, "onColorChange: coldValues -> " + mColdValues);
             }
         });
+
         sbBrightness.setOnPositionChangedListener(new CustomSeekBar.OnPositionChangedListener() {
             @Override
             public void onNewPosition(float position, boolean isUp) {

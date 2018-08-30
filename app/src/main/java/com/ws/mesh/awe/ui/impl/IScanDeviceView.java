@@ -12,4 +12,7 @@ public interface IScanDeviceView {
     void addDeviceStatus(int status);
 
     void onBLEError();
+
+    //结束扫描
+    void onStopScan();
 }

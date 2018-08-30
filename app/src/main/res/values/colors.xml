@@ -16,12 +16,15 @@
     <color name="timing_bg">#273540</color>
     <color name="main_group_switch_background_normal_color">#324656</color>
 
+    <color name="magenta">#ec008c</color>
+    <color name="mauve">#8e4d9e</color>
+    <color name="teal">#2bb673</color>
     <color name="red">#FF0000</color>
     <color name="orange">#FF8F00</color>
-    <color name="yellow">#D6DF20</color>
+    <color name="yellow">#D7DF23</color>
     <color name="green">#00FF00</color>
-    <color name="cyan">#02FFFF</color>
-    <color name="blue">#0000FF</color>
+    <color name="cyan">#00A79D</color>
+    <color name="blue">#1B75BC</color>
     <color name="purple">#7E00FF</color>
     <color name="status_bar">#142633</color>
 </resources>
